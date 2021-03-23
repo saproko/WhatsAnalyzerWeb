@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <!-- Skripte-->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <!-- Jumbotron Header -->
+    <div class="jumbotron bg-info text-white text-center">
+      <div class="container">
+        <h1 class="display-4">Chat Report</h1>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row text-muted">
+
+        <!-- Fakten zum Chat -->
+        <div class="col-lg-6 col-md-12 pb-4">
+          <div class="card card-table">
+            <div class="card-block">
+              <h4 class="card-header text-center">
+                Fakten zum Chat
+              </h4>
+            </div>
+            <table class="table mb-1">
+              <tbody>
+                {% for key, val in chat_facts.items() %}
+                <tr>
+                  <th scope="row">{{key}}</th>
+                  <td>{{val}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>   
+          </div>
+        </div>
+
+        <!-- Häufigste Links -->
+        <div class="col-lg-6 col-md-12 pb-4">
+          <div class="card card-table">
+            <div class="card-block">
+              <h4 class="card-header text-center">
+                Häufigste Links
+              </h4>
+            </div>
+            <table class="table mb-1">
+              <tbody>
+                {% for lnk, cnt in link_list %}
+                  <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{lnk}}</td>
+                    <td>{{cnt}} mal</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if "IOS" == os %}
+    <!-- Häufigste Medientypen (nur iOS) -->
+    <div class="container-fluid" style="padding-inline: 0px;">
+      <div class="container-fluid">
+        <h3 class="carousel-header">Häufigste Medientypen</h1>
+      </div>
+      <div class="carousel text-muted">
+        {% for user, data in media_dict.items() %}
+        <div class="card carousel-element">
+          <div class="card-block text-center">
+            <h4 class="card-header">{{user.username}}</h4>
+          </div>
+          <table class="table">
+            <tbody>
+            {% for med, cnt in data %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{med}}</td>
+                <td>{{cnt}} mal</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Häufigste Wörter -->
+    <div class="container-fluid" style="padding-inline: 0px;">
+      <div class="container-fluid">
+        <h3 class="carousel-header">Häufigste Wörter (Standardworte ausgenommen)</h1>
+      </div>
+      <div class="carousel text-muted">
+        {% for user, data in word_dict.items() %}
+        <div class="card carousel-element">
+          <div class="card-block text-center">
+            <h4 class="card-header text">{{user.username}}</h4>
+          </div>
+          <table class="table">
+            <tbody>
+            {% for wrd, cnt in data %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>"{{wrd}}"</td>
+                <td>{{cnt}} mal</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Emoji Nutzung -->
+    <div class="container-fluid" style="padding-inline: 0px;">
+      <div class="container-fluid">
+        <h3 class="carousel-header">Emoji Nutzung</h1>
+      </div>
+      <div class="carousel text-muted">
+        {% for user, data in emoji_dict.items() %}
+        <div class="card carousel-element">
+          <div class="card-block text-center">
+            <h4 class="card-header text">{{user.username}}</h4>
+          </div>
+          <table class="table">
+            <tbody>
+            {% for emj, cnt in data %}
+              <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{emj}}</td>
+                <td>{{cnt}} mal</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Plots -->
+    <div class="container-fluid text-center text-muted">
+      <div class="row">
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_per_user|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Nachrichten pro Nutzer</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ media_per_user|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Medienanzahl pro Nutzer</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ conv_start|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">
+                Wie oft hat der Nutzer die Unterhaltung gestartet?
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_len_per_user|safe}}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">
+                Durchschnittliche Anzahl an Worten pro Nachricht
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_by_weekday|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Nachrichten pro Wochentag</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_by_hour|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Nachrichten pro Uhrzeit</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_per_week|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Nachrichten pro Woche</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-xl-6 p-4">
+          <div class="card h-100 d-flex p-2">
+            {{ msg_per_person_per_week|safe }}
+            <div class="card-block mt-auto">
+              <h2 class="card-title">Nachrichten pro Woche pro Nutzer</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+pandas
+scipy
+emoji
+seaborn
+matplotlib
+flask
+flask-session

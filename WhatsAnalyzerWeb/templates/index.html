@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" />
+
+    <style>
+      .card {
+        transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+          0.3s box-shadow,
+          0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+          background-color 100ms linear;
+        min-height: 25vw;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      input[type="submit"] {
+        display: none;
+      }
+
+      label {
+        display: block;
+        height: 100%;
+      }
+
+      div#loading {
+        display: none;
+        cursor: wait;
+      }
+
+      .parent {
+        position: relative;
+        height: 80vh;
+      }
+
+      .img-center {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 80vw;
+        max-height: 60vh;
+      }
+    </style>
+
+    <!-- JS stuff-->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="{{ url_for('static', filename='js/file_upload.js')}}" defer></script>
+  </head>
+
+  <body>
+    <div id="loading">
+      <div class="parent text-center">
+        <img
+          src="{{ url_for('static', filename='img/loadingcat.gif')}}"
+          alt="please wait"
+          class="img-center"
+        />
+        <p class="text-center" style="margin-top: 5vh">
+          Dein Bericht wird erstellt...
+        </p>
+      </div>
+    </div>
+    <div id="content">
+      <div class="jumbotron bg-dark text-white text-center">
+        <div class="container">
+          <h1 class="display-4">WhatsApp Chat Analyzer</h1>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="container-fluid">
+          <div class="row text-center text-muted justify-content-around">
+            <div class="col-sm-5 m-2">
+              <div
+                class="card card-block"
+                id="file-upload-card"
+                onclick="file_upload_button_click()"
+              >
+                <div
+                  class="card-body align-items-center d-flex justify-content-center"
+                >
+                  <label>
+                    <h2 class="card-title">Chatdatei hochladen</h2>
+                  </label>
+                  <input
+                    type="file"
+                    name="chat"
+                    accept=".txt"
+                    id="file-upload-button"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 m-2">
+              <div
+                class="card card-block"
+                onclick="submit_button_click()"
+                id="submit-card"
+              >
+                <div
+                  class="card-body align-items-center d-flex justify-content-center"
+                >
+                  <label> <h2 class="card-title">Bestätigen</h2> </label>
+                  <input type="submit" id="submit-button" />
+                  <!-- <input id="submit-button" /> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
