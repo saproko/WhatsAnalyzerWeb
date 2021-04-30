@@ -17,8 +17,23 @@ With this program you can get insight into all your WhatsApp chats, including gr
 * Link count
 * HTML report with plots + display in Terminal
 
+## Requirements
+
+1. Python 3.6+ is required
+2. Install the required libraries<br>`pip install -r requirements.txt`
+
+## Usage
+
+1. cd into the project's root directory
+2. For testing you can `python run.py` to host the website on your localhost
+3. Follow the instructions on the webpage (more detailed tutorial coming soon)
+
 ## Limitations
 
-Currently the texts are only in German. Furthermore, since the format of the exported chat will probably vary from region to region, you might run into errors. If you have problems, please contact me, as I intend to improve compatibility in the future.
+Currently the texts are only in German.<br>
+
+Since the format of the exported chat will probably vary from region to region, you might run into errors.<br>
+
+If you have problems, please contact me, as I intend to improve compatibility in the future.<br>
 
 E-Mail: saproko17@gmail.com
