@@ -1,5 +1,11 @@
 .vscode
 __pycache__
 venv
+
+test
+run_test.py
+
 flask_session
 render.html
+
+IGNOREME.md

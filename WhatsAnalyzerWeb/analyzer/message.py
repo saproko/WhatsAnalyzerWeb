@@ -8,7 +8,7 @@ from WhatsAnalyzerWeb.analyzer import globals_
 
 
 class Message:
-    def __init__(self, msg: list, os: str) -> None:
+    def __init__(self, msg: str, os: str) -> None:
         self._msg = msg
         self._os = os
         self._stopwords = globals_.STOPWORDS
