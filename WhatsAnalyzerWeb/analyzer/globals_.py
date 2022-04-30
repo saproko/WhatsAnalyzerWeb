@@ -8,7 +8,7 @@ DATEPARSE_ANDROID = "%d.%m.%y, %H:%M"
 
 MSG_PATTERN = (r"^(?P<prefix>(?P<dateandtime>(?:\[)?\d\d\.\d\d\.\d\d,\s\d\d:\d\d(?::\d\d\])?)"  # dateandtime
                r"\s(?:-\s)?(?P<username>.+?):\s?)"  # username und Ende des Prefix
-               r"(?:(?:<?|[^\w\d])(?:.*(?=Dokument\sweggelassen))?(?P<media>\w+)\s(?:ausgeschlossen|weggelassen)>?$)?"  # media
+               r"(?:(?:<?|[^\w\d])(?:.*(?=(Dokument\sweggelassen|document\somitted)))?(?P<media>\w+)\s(?:ausgeschlossen|weggelassen|omitted)>?$)?"  # media
                r"(?P<body>.*)")  # body
 
 
