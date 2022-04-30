@@ -10,7 +10,6 @@ import os
 
 class ChatManager():
     def __init__(self, chat_read) -> None:
-        self._chatname = "Platzhalter"
         self._chat_read = chat_read
         self._os = self._init_os()
         self._messages = self._init_messages()

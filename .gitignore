@@ -3,7 +3,7 @@ __pycache__
 venv
 
 test
-run_test.py
+tests.py
 
 flask_session
 render.html
